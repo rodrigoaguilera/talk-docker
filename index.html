@@ -1,58 +1,228 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Docker y Drupal</title>
+    <title>Docker y Drupal</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/sky.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
-<style>
-  body .reveal section img {
-    border: 0;
-  }
-</style>
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <style>
+body .reveal section img {
+  border: 0;
+}
+body .reveal section h1, body .reveal section h2 {
+  letter-spacing: 0;
+}
+    </style>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
+    <!-- Printing and PDF exports -->
+    <script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
           <img src="images/Druplicon2015.png" alt="Druplicon" />
           <h2 style="color:red;">♥</h2>
           <img src="images/docker-logo.png" alt="Docker" />
         </section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+        <section>
+          <h1>Docker</h1>
+          <h3>Súbete al barco de las herramientas de desarrollo estándar 🚢</h3>
+          <aside class="notes">
+            La motivación principal de esta charla dar a conocer nuestro recorrido <br />
+            hacia una estandarización de las herramientas de desarrollo. <br />
+            Dicho de otro modo: queremos dar por solucionados problemas <br />
+            del pasado para dedicarnos a nuevos problemas.
+          </aside>
+        </section>
+        <section>
+          <h1>Hola 👋</h1>
+          <p class="fragment">
+          <img src="images/ymbralogo.png" alt="Ymbra" width="250" style="border: 0">
+          </p>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+          <aside class="notes">
+            Gracias a la AED, Ymbra <br />
+            Diego se ha incorporado recientemente a Ymbra desde Sevilla <br />
+            Tiene un verdadero interés por la estandarización para que <br />
+            los proyectos que realizamos sigan unos criterios definidos.  <br />
+            Ambos teniamos un especial interés en Docker por que nos ha facilitado mucho la vida. <br />
+            Rodrigo es de Madrid y ahora vive y trabaja en Barcelona con Ymbra. <br />
+            Lleve unos años dando charlas sobre procesos de desarrollo y calidad <br />
+            en temas como composer, revisión de códigoi, contenido por defecto  y testing con behat. <br />
+            Siempre tiene curiosidad sobre como se puede mejorar o automatizar los procesos del día a día. <br />
+          </aside>
+        </section>
+        <section>
+          <section>
+            <h1>Historia</h1>
+            <p>¿Como hemos llegado hasta aqui?</p>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Servidores de desarrollo local</h2>
+            <ul>
+              <li>WAMP, XAMPP, MAMP, etc</li>
+              <li>Gestores de paquetes: apt, rpm, brew (mac)</li>
+            </ul>
+            <aside class="notes">
+              Habitualmente versiones fijas.
+              Las herramientas de soporte también estaban instaladas en la maquina <br />
+              Ejemplos: drush, nodejs, ruby, php.
+            </aside>
+          </section>
+          <section>
+            <h2>Virtualización completa</h2>
+            <ul>
+              <li>Virtualbox, VMware, KVM</li>
+              <li>Gestores de virtualización: vagrant</li>
+            </ul>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Otras gestores de virtualización ligera</h2>
+            <ul>
+              <li>LXC</li>
+              <li>chroot</li>
+            </ul>
+            <aside class="notes">
+              Docker va más proporcionando un ecosistema: <br />
+              Dockerfile, red, volumenes, API, etc.
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>Docker 🐋</h1>
+            <aside class="notes">
+              Virtualización ligera a nivel de sistema operativo. <br />
+              Aisla procesos de manera que cada uno tiene su red, <br />
+              conjunto de usuarios y sistemas de ficheros gracias a <br />
+              tecnologias de Linux como namespaces o cgroups. <br />
+            </aside>
+          </section>
+          <section>
+            <h1>Historia</h1>
+            <ul>
+              <li>Comienza como un gestor de LXC</li>
+              <li>Reescritura en Go separando componentes y creando una API REST</li>
+            </ul>
+            <aside class="notes">
+              Principal adopción como herramienta de desarrollo <br />
+              Cada vez más se empuja en entornos de producción
+            </aside>
+          </section>
+          <section>
+            <h2>Virtualización ligera 🚈</h2>
+            <aside class="notes">
+              Arrancar y parar es muy rápido. <br />
+              Multiples instancias de una misma imagén comparten sistema de ficheros <br />
+              hasta que tienen que escribir algo distinto en ellos. <br />
+              Debido a esto el nivel de aislamiento no es completo <br />
+              y hay precauciones de seguridad que tomar (usuario root).
+            </aside>
+          </section>
+          <section>
+            <h2>Contenedores 📦</h2>
+            <aside class="notes">
+              Para muchos puede suponer un cambio de paradigma  <br />
+              porque usa una "maquina virtual" por cada herramienta que usamos: <br />
+              php, servidor, web, varias bases de datos.
+            </aside>
+          </section>
+          <section>
+            <h2>Imágenes y contenedores</h2>
+            <aside class="notes">
+              Analogia con orientación a objetos: clase e instancia. <br />
+              La imagen es la plantilla base y el contenedor es lo que realmente se ejecuta.
+            </aside>
+          </section>
+          <section>
+            <h2>Docker multiplataforma</h2>
+            <p>Mac y windows</p>
+            <aside class="notes">
+              Es una tecnologia solo disponible en linux. <br />
+              Se crean maquinas virtuales transparentes con un pequeño coste de rendimiento <br />
+              Retos a la hora de compartir ficheros entre linux y el sistema operativo anfitrión.
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Manos a la obra con docker</h2>
+            <p>Como empezar a desenvolverse con los comandos</p>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Instalar docker</h2>
+            <p>Community edition</p>
+            <ul>
+              <li>Linux: añadir repos oficiales y <pre>apt install docker-ce </pre></li>
+              <li>Mac: Descargar de la web o <pre> brew cask install docker </pre></li>
+              <li>Windows: descargar instalador</li>
+            </ul>
+            <aside class="notes">
+              Todos los casos necesitan privilegios elevados. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Hola mundo</h2>
+            <pre>
+              docker run hello-world
+            </pre>
+            <aside class="notes">
+              El cliente hace una petición al demonio <br />
+              Se descarga una imagen de un repositorio <br />
+              Una instancia de esa imagen es creada <br />
+              Se ejecuta el binario por defecto de esa imagen <br />
+              La salida del comando se envia a la terminal
+            </aside>
+          </section>
+          <section>
+            <h2>Un paso más allá</h2>
+            <pre>
+              docker run -it --rm debian bash
+            </pre>
+            <img src="images/docker-run-fresh.png" alt="Docker run" />
+            <aside class="notes">
+              Sesión interactiva dentro del contenedor. <br />
+              --rm Destruye el contenedor cuando termine. <br />
+              Comienzo desde un sistema limpio
+            </aside>
+        </section>
+      </div>
+    </div>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+  dependencies: [
+  { src: 'plugin/markdown/marked.js' },
+  { src: 'plugin/markdown/markdown.js' },
+  { src: 'plugin/notes/notes.js', async: true },
+  { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+  ]
+});
+    </script>
+  </body>
 </html>
