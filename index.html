@@ -178,6 +178,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             </ul>
             <aside class="notes">
               Todos los casos necesitan privilegios elevados. <br />
+              En linux es posible que tengas que añadir a tu usuario al grupo "docker" <br />
             </aside>
           </section>
           <section>
@@ -196,14 +197,122 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           <section>
             <h2>Un paso más allá</h2>
             <pre>
-              docker run -it --rm debian bash
+              docker run -it debian bash
             </pre>
             <img src="images/docker-run-fresh.png" alt="Docker run" />
             <aside class="notes">
               Sesión interactiva dentro del contenedor. <br />
-              --rm Destruye el contenedor cuando termine. <br />
               Comienzo desde un sistema limpio
             </aside>
+          </section>
+          <section>
+            <h2>Instalar servidor</h2>
+            <pre>
+              apt update
+              apt install apache2 mysql-server php
+              service start apache
+              service start mysql
+            </pre>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <img src="images/lady.jpg" alt="Old lady at computer" />
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Abrir puertos ⚓</h2>
+            <pre>
+              docker run -it -p 80:80 debian bash
+            </pre>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h1>🗿</h1>
+            <h2>El contenedor monolítico</h2>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>El contenedor para cada servicio</h2>
+            <p>Cada proceso separado en su propio contenedor</p>
+            <pre>
+              docker run -p 80:80 php:apache
+              docker run mysql
+            </pre>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Cocinar nuestras propias imágenes</h2>
+            <p>Dockerfile</p>
+
+            <pre>
+FROM debian
+RUN apt update && apt install apache php php-gd
+RUN a2enmod rewrite
+RUN curl https://getcomposer.org/download/1.6.3/composer.phar \
+> /usr/local/bin/composer && \
+chmod 755 /usr/local/bin/composer
+COPY php.ini /usr/local/etc/php/php.ini
+CMD ["apachectl", "-DFOREGROUND"]
+            </pre>
+            <aside class="notes">
+            No se está limpiando la caché <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Construir la imagen</h2>
+            <pre>
+              docker build -t myapache .
+              docker run -p 80:80 myapache
+            </pre>
+            <aside class="notes">
+              El punto indica que se tiene que construir el directorio actual. <br />
+              Es necesario tener un php.ini en el mismo directorio <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Repositorios de imágenes</h2>
+            <p>https://hub.docker.com/</p>
+            <pre>
+              docker run -p 80:80 php:apache
+              docker run mariadb:10.2
+              docker run phpmyadmin/phpmyadmin
+            </pre>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Imágenes por y para la comunidad</h2>
+            <p>Docker4Drupal</p>
+            <p>Preparadas para usar directamente</p>
+            <ul>
+              <li>PHP con Drupal 6,7,8</li>
+              <li>MariaDB</li>
+              <li>Redis</li>
+              <li>Varnish</li>
+              <li>Solr</li>
+              <li>Etc..</li>
+            </ul>
+            <aside class="notes">
+              Se pueden configurar para activar XDebug y otras herramientas. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Persistencia de datos: volúmenes</h2>
+            <pre>
+              docker run -v "$PWD":/var/www/html/ -p 80:80 php:apache
+              docker run -v files:/var/www/html/web/sites/default/files -p 80:80 php:apache
+              docker run -v database:/var/lib/mysql mariadb
+            </pre>
+            <aside class="notes">
+              Me descargo un repositorio de un proyecto y quiero ejecutarlo en el contenedor. <br />
+              Quiero destruir el contenedor a menudo <br />
+            </aside>
+          </section>
         </section>
       </div>
     </div>
