@@ -15,6 +15,9 @@
 body .reveal section img {
   border: 0;
 }
+body .reveal pre {
+  width: 99%;
+}
 body .reveal section h1, body .reveal section h2 {
   letter-spacing: 0;
 }
@@ -41,9 +44,9 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           <h1>Docker</h1>
           <h3>Súbete al barco de las herramientas de desarrollo estándar 🚢</h3>
           <aside class="notes">
-            La motivación principal de esta charla dar a conocer nuestro recorrido <br />
+            La motivación de esta charla dar a conocer nuestro recorrido <br />
             hacia una estandarización de las herramientas de desarrollo. <br />
-            Dicho de otro modo: queremos dar por solucionados problemas <br />
+            Queremos dar por solucionados problemas <br />
             del pasado para dedicarnos a nuevos problemas.
           </aside>
         </section>
@@ -61,8 +64,16 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             Ambos teniamos un especial interés en Docker por que nos ha facilitado mucho la vida. <br />
             Rodrigo es de Madrid y ahora vive y trabaja en Barcelona con Ymbra. <br />
             Lleve unos años dando charlas sobre procesos de desarrollo y calidad <br />
-            en temas como composer, revisión de códigoi, contenido por defecto  y testing con behat. <br />
+            en temas como composer, revisión de código, contenido por defecto  y testing con behat. <br />
             Siempre tiene curiosidad sobre como se puede mejorar o automatizar los procesos del día a día. <br />
+          </aside>
+        </section>
+        <section>
+          <h2>¿Que tal vosotros?</h2>
+          <aside class="notes">
+            Quien tiene experiencia con docker? <br />
+            Quien se dedica a la desarrollo? <br />
+            Quien se dedica a ayudar a los desarrolladores a desplegar código? <br />
           </aside>
         </section>
         <section>
@@ -94,7 +105,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             </aside>
           </section>
           <section>
-            <h2>Otras gestores de virtualización ligera</h2>
+            <h2>Otros gestores de virtualización ligera</h2>
             <ul>
               <li>LXC</li>
               <li>chroot</li>
@@ -207,12 +218,12 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           </section>
           <section>
             <h2>Instalar servidor</h2>
-            <pre>
+            <pre><code data-trim data-noescape>
               apt update
               apt install apache2 mysql-server php
-              service start apache
               service start mysql
-            </pre>
+              service start apache
+            </code></pre>
             <aside class="notes">
             </aside>
           </section>
@@ -223,9 +234,9 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           </section>
           <section>
             <h2>Abrir puertos ⚓</h2>
-            <pre>
+            <pre><code data-trim data-noescape>
               docker run -it -p 80:80 debian bash
-            </pre>
+            </code></pre>
             <aside class="notes">
             </aside>
           </section>
@@ -233,42 +244,44 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <h1>🗿</h1>
             <h2>El contenedor monolítico</h2>
             <aside class="notes">
+              Lo que acabamos de construir no es lo más correcto <br />
+              pero es intuitivo <br />
             </aside>
           </section>
           <section>
             <h2>El contenedor para cada servicio</h2>
             <p>Cada proceso separado en su propio contenedor</p>
-            <pre>
+            <pre><code data-trim data-noescape>
               docker run -p 80:80 php:apache
               docker run mysql
-            </pre>
+            </code></pre>
             <aside class="notes">
             </aside>
           </section>
           <section>
-            <h2>Cocinar nuestras propias imágenes</h2>
+            <h2>Cocinar nuestras propias imágenes 🍲</h2>
             <p>Dockerfile</p>
 
-            <pre>
+            <pre><code data-trim data-noescape>
 FROM debian
-RUN apt update && apt install apache php php-gd
+RUN apt update && apt install apache2 php php-gd
 RUN a2enmod rewrite
 RUN curl https://getcomposer.org/download/1.6.3/composer.phar \
 > /usr/local/bin/composer && \
 chmod 755 /usr/local/bin/composer
 COPY php.ini /usr/local/etc/php/php.ini
 CMD ["apachectl", "-DFOREGROUND"]
-            </pre>
+            </code></pre>
             <aside class="notes">
             No se está limpiando la caché <br />
             </aside>
           </section>
           <section>
-            <h2>Construir la imagen</h2>
-            <pre>
-              docker build -t myapache .
-              docker run -p 80:80 myapache
-            </pre>
+            <h2>Construir la imagen 🔧</h2>
+            <pre><code data-trim data-noescape>
+              docker build -t ymbra/myapache .
+              docker run -p 80:80 ymbra/myapache
+            </code></pre>
             <aside class="notes">
               El punto indica que se tiene que construir el directorio actual. <br />
               Es necesario tener un php.ini en el mismo directorio <br />
@@ -277,11 +290,9 @@ CMD ["apachectl", "-DFOREGROUND"]
           <section>
             <h2>Repositorios de imágenes</h2>
             <p>https://hub.docker.com/</p>
-            <pre>
-              docker run -p 80:80 php:apache
-              docker run mariadb:10.2
-              docker run phpmyadmin/phpmyadmin
-            </pre>
+            <pre><code data-trim data-noescape>
+              docker push ymbra/myapache
+            </code></pre>
             <aside class="notes">
             </aside>
           </section>
@@ -303,14 +314,216 @@ CMD ["apachectl", "-DFOREGROUND"]
           </section>
           <section>
             <h2>Persistencia de datos: volúmenes</h2>
-            <pre>
-              docker run -v "$PWD":/var/www/html/ -p 80:80 php:apache
-              docker run -v files:/var/www/html/web/sites/default/files -p 80:80 php:apache
-              docker run -v database:/var/lib/mysql mariadb
-            </pre>
+            <pre><code data-trim data-noescape>
+docker run -v "$PWD":/var/www/html/ -p 80:80 php:apache
+docker run -v files:/var/www/html/sites/default/files -p 80:80 php:apache
+docker run -v database:/var/lib/mysql mariadb
+            </code></pre>
             <aside class="notes">
-              Me descargo un repositorio de un proyecto y quiero ejecutarlo en el contenedor. <br />
+              Usar un repositorio de un proyecto y ejecutarlo dentro del contenedor. <br />
               Quiero destruir el contenedor a menudo <br />
+              El contenedor como un proceso <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Coordinación entre contenedores</h2>
+            <img src="images/docker-compose.png" alt="Docker compose logo" />
+            <aside class="notes">
+              Sirve para definir los contenedores que voy a usar <br />
+              y lanzarlos todos de una sola vez. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>docker-compose.yml</h2>
+            <pre><code data-trim data-noescape>
+version: "3.4"
+services:
+  web:
+    image: ymbra/drupal
+    volumes:
+      - .:/var/www
+    ports:
+      - "80:80"
+  db:
+    image: mariadb:10.2
+    environment:
+      MYSQL_USER: db
+      MYSQL_PASSWORD: db
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: db
+            </code></pre>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>comandos docker compose</h2>
+            <pre><code data-trim data-noescape>
+docker-compose up
+docker-compose down
+docker-compose exec <SERVICIO> <COMANDO>
+# Por ejemplo:
+docker-compose exec web bash
+docker-compose exec web composer install
+            </code></pre>
+            <aside class="notes">
+              Levantar todos los contenedores <br />
+              Se queda el terminal imprimiendo logs<br />
+              Destruir todos los contenedores, volumenes y redes <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Añadir nuevos servicios a docker-compose.yml</h2>
+            <p>PHPMyAdmin</p>
+            <pre><code data-trim data-noescape>
+services:
+  ...
+  pma:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOSTS: "db"
+      PMA_USER: db
+      PMA_PASSWORD: db
+    ports:
+      - "8080:80"
+            </code></pre>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Añadir nuevos servicios a docker-compose.yml</h2>
+            <p>Mailhog</p>
+            <pre><code data-trim data-noescape>
+services:
+  ...
+  web:
+   ...
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+            </code></pre>
+            <aside class="notes">
+              Servidor smtp para evitar el envio real de mails. <br />
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Trabajo en equipo</h2>
+            <img src="images/emoji-team.jpg" alt="Nudge emojis" style="width:60%;" />
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Entornos definidos en código</h2>
+            <ul>
+              <li>Versiones concretas para todos los desarrolladores</li>
+              <li>Tus mejoras son mejoras para todos</li>
+              <li>Abstracción sobre complejidades</li>
+            </ul>
+            <aside class="notes">
+              Funciona en mi entorno local! <br />
+              Añadir nuevos servicios, subir versiones sin que se rompa <br />
+              Por ejemplo si el deploy requiere una vpn, se puede dejar configurada <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Desechable y ligero 🚮</h2>
+            <ul>
+              <li>Nuevas incorporaciones al equipo</li>
+              <li>Cambio de portátil</li>
+              <li>Inicio desde cero rápido y sencillo</li>
+            </ul>
+            <aside class="notes">
+              Otras soluciones tardan hasta 15 minutos solo en provisionar la máquina. <br />
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Errores comunes y buenas practicas</h2>
+            <img src="images/experience.gif" alt="Captain.gif" style="width:60%;" />
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Rendimiento</h2>
+            <p>Compartir ficheros entre el huesped y el contenedor</p>
+            <ul>
+              <li>Linux: no sufre penalización</li>
+              <li>
+                Mac: flags para volumenes
+
+            <pre><code data-trim data-noescape>
+            docker run -v /Users/ymbra/app:/app:delegated drupal
+            </code></pre>
+              </li>
+              <li>Mac y windows: docker-sync</li>
+            </ul>
+            <aside class="notes">
+              Docker sync usa unison para sincronizar ficheros y directorios. <br />
+              Es un sistema delicado sobre todo por temas de eventos.
+            </aside>
+          </section>
+          <section>
+            <h2>Permisos y propietarios</h2>
+            <p>ficheros con UIDs distintas al usuario huesped</p>
+            <ul>
+              <li>Mac y windows: sin problemas. mapeado al usuario del huesped</li>
+              <li> Linux:
+                <ul>
+                  <li>
+                    Modificar huesped para tener permisos sobre otros usuarios
+                  </li>
+                  <li>
+                    Modificar imágenes para que acepten UID como una variable de entorno.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <aside class="notes">
+              Tambien ocurre viceversa <br />
+              Los contenedores se ejecutan con UIDs arbitrarias. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Un contenedor por componente/herramienta</h2>
+            <aside class="notes">
+              Servidor web y php en servidores distintos. <br />
+              Nodejs es aceptable si solo es por cuestiones de desarrollo. <br />
+              Drush por ejemplo no tiene sentido separarlo <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Documentar la responsabilidad de cada contenedor</h2>
+            <ul>
+              <li>¿Que contenedor se usa para drush/composer?</li>
+              <li>¿Como importo un volcado de base de datos?</li>
+              <li>¿Como activo XDebug?</li>
+            </ul>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Subir imágenes al repositorio</h2>
+            <p>En vez de añadir un Dockerfile a tu proyecto</p>
+            <ul>
+              <li>Otros compañeros se ahorran la compilación</li>
+              <li>Reusabilidad en otros proyectos</li>
+              <li>Ayuda a contruir imágenes más simples y configurables</li>
+            </ul>
+            <aside class="notes">
+              Descarga de la la imágen ya compilada. <br />
+              Varios proyectos pueden usar la misma imágen <br />
+              No es aconsejable alamacenar secretos en la imagen. <br />
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Herramientas alrededor de docker</h2>
+            <p>Añaden funcionalidad por encima de docker</p>
+            <aside class="notes">
             </aside>
           </section>
         </section>
