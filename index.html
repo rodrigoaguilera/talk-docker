@@ -72,14 +72,28 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           <h2>¿Que tal vosotros?</h2>
           <aside class="notes">
             Quien tiene experiencia con docker? <br />
-            Quien se dedica a la desarrollo? <br />
-            Quien se dedica a ayudar a los desarrolladores a desplegar código? <br />
+            Quien se dedica al desarrollo exclusivamente? <br />
+            Quien se se considera más devops? <br />
+          </aside>
+        </section>
+        <section>
+          <h2>Agenda</h2>
+          <p><a href="https://rodrigoaguilera.github.io/talk-docker/">https://rodrigoaguilera.github.io/talk-docker/</a></p>
+          <ul>
+            <li>Introducción a docker</li>
+            <li>Comandos docker</li>
+            <li>Trabajo en equipo</li>
+            <li>Errores comunes y buenas prácticas</li>
+            <li>Entornos completos</li>
+            <li>Hacia la estandarización</li>
+          </ul>
+          <aside class="notes">
           </aside>
         </section>
         <section>
           <section>
             <h1>Historia</h1>
-            <p>¿Como hemos llegado hasta aqui?</p>
+            <p>¿Como hemos llegado hasta aquí?</p>
             <aside class="notes">
             </aside>
           </section>
@@ -121,8 +135,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <h1>Docker 🐋</h1>
             <aside class="notes">
               Virtualización ligera a nivel de sistema operativo. <br />
-              Aisla procesos de manera que cada uno tiene su red, <br />
-              conjunto de usuarios y sistemas de ficheros gracias a <br />
+              Aisla procesos de manera que cada uno tiene su red,
+              conjunto de usuarios y sistemas de ficheros gracias a
               tecnologias de Linux como namespaces o cgroups. <br />
             </aside>
           </section>
@@ -160,6 +174,19 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <aside class="notes">
               Analogia con orientación a objetos: clase e instancia. <br />
               La imagen es la plantilla base y el contenedor es lo que realmente se ejecuta.
+            </aside>
+          </section>
+          <section>
+            <h2>Entornos de desarrollo docker</h2>
+            <ul>
+              <li>Proyectos separados con requisitos propios</li>
+              <li>Diferentes versiones de la misma herramienta</li>
+              <li>Gestión independiente de cada uno (levantar, parar, reiniciar, borrar, etc.)</li>
+              <li>Extensibles con otros servicios</li>
+            </ul>
+            <aside class="notes">
+              Distintas versiones de php, mysql, mariadb, etc. <br />
+              Si se necesita una base de datos microsoft se puede añadir. <br />
             </aside>
           </section>
           <section>
@@ -256,6 +283,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               docker run mysql
             </code></pre>
             <aside class="notes">
+              Se debe separar aun más entre apache y php <br />
             </aside>
           </section>
           <section>
@@ -387,6 +415,7 @@ services:
       - "8080:80"
             </code></pre>
             <aside class="notes">
+              Podria ser redis o solr. <br />
             </aside>
           </section>
           <section>
@@ -423,7 +452,7 @@ services:
             </ul>
             <aside class="notes">
               Funciona en mi entorno local! <br />
-              Añadir nuevos servicios, subir versiones sin que se rompa <br />
+              Añadir nuevos servicios, actualizar versiones comprobando que todo va bien <br />
               Por ejemplo si el deploy requiere una vpn, se puede dejar configurada <br />
             </aside>
           </section>
@@ -433,9 +462,11 @@ services:
               <li>Nuevas incorporaciones al equipo</li>
               <li>Cambio de portátil</li>
               <li>Inicio desde cero rápido y sencillo</li>
+              <li>Reducción de herramientas locales</li>
             </ul>
             <aside class="notes">
               Otras soluciones tardan hasta 15 minutos solo en provisionar la máquina. <br />
+              No hay necesidad de tener drush, nodejs, ruby, etc. <br />
             </aside>
           </section>
         </section>
@@ -487,7 +518,7 @@ services:
             </aside>
           </section>
           <section>
-            <h2>Un contenedor por componente/herramienta</h2>
+            <h2>Un contenedor por servicio o herramienta</h2>
             <aside class="notes">
               Servidor web y php en servidores distintos. <br />
               Nodejs es aceptable si solo es por cuestiones de desarrollo. <br />
@@ -510,7 +541,7 @@ services:
             <ul>
               <li>Otros compañeros se ahorran la compilación</li>
               <li>Reusabilidad en otros proyectos</li>
-              <li>Ayuda a contruir imágenes más simples y configurables</li>
+              <li>Ayuda a construir imágenes más simples y configurables</li>
             </ul>
             <aside class="notes">
               Descarga de la la imágen ya compilada. <br />
@@ -521,8 +552,170 @@ services:
         </section>
         <section>
           <section>
-            <h2>Herramientas alrededor de docker</h2>
+            <h2>Herramientas para usar drupal y docker</h2>
             <p>Añaden funcionalidad por encima de docker</p>
+            <aside class="notes">
+              No se mencionan herramientas vagrant o locales. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Funcionalidad extra</h2>
+            <ul>
+              <li>Preconfigurado</li>
+              <li>Gestor de tareas en el contenedor</li>
+              <li>Integraciones con otros servicios: pantheon, platform.sh, etc</li>
+            </ul>
+            <aside class="notes">
+              php, servidor web y base datos ya preparadas. <br />
+              drush, dump de bases de datos, etc <br />
+              gestión de virtual hosts.
+            </aside>
+          </section>
+          <section>
+            <h2>Herramientas más populares</h2>
+            <ul>
+              <li>DrupalVM</li>
+              <li>Docksal</li>
+              <li>Ddev</li>
+              <li>Lando</li>
+            </ul>
+            <aside class="notes">
+              Todas tienen una buena documentación. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>DrupalVM</h2>
+            <ul>
+              <li>Escrita con vagrant en mente</li>
+              <li>Soporte docker experimental</li>
+              <li>Monolítico</li>
+              <li>Especifíco para Drupal</li>
+            </ul>
+            <aside class="notes">
+              Tiene un bonito dashboard. <br />
+              Sincronización con NFS: problemas de rendimiento<br />
+              No tiene gestor de tareas: como es monolitico solo hay una maquina virtual. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Docksal</h2>
+            <ul>
+              <li>Herramienta de consola escrita en bash</li>
+              <li>Requiere virtualbox en mac y windows</li>
+              <li>Comandos personalizados</li>
+              <li>Centrado en Drupal, Wordpress y magento</li>
+            </ul>
+            <aside class="notes">
+              Desarrollado por FFW <br />
+              Soporte para ngrok. <br />
+              También se compone de un conjunto de imágenes <br />
+              Extremadamente configurable. <br />
+              Soporta unison experimentalmente.<br />
+            </aside>
+          </section>
+          <section>
+            <h2>Ddev</h2>
+            <ul>
+              <li>Herramienta de consola escrita en go</li>
+              <li>Desarrollado por Drud. </li>
+              <li>Soporta desplieges a los entornos de drud</li>
+              <li>Centrado en Drupal, Wordpress y typo3</li>
+            </ul>
+            <aside class="notes">
+              Binario ya compilado por cada arquitectura <br />
+              No usa virtualbox. <br />
+              Compatibilidad con otras herramientas: toma el puerto 80. <br />
+              Menos monolítico <br />
+              No soporta unison <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Lando</h2>
+            <ul>
+              <li>Herramienta de consola escrita en Javascript</li>
+              <li>Requiere nodejs</li>
+              <li>Muy flexible: comandos, eventos,servicios adicionales, API, etc.</li>
+              <li>Soporta un amplio espectro de frameworks/lenguajes</li>
+            </ul>
+            <aside class="notes">
+              Desarrollado por Tandem (anteriormente kalabox). <br />
+              No usa virtualbox. <br />
+              Problemas de rendimiento <br />
+              Compatibilidad con otras herramientas: toma el puerto 80. <br />
+            </aside>
+          </section>
+          <section>
+            <h2>Puntos en común</h2>
+            <ul>
+              <li>Abstracción del entorno para el usuario</li>
+              <li>Automatizan tareas</li>
+              <li>Nacen en base a las necesidades de un equipo de desarrollo</li>
+            </ul>
+            <aside class="notes">
+              La gestión de DNS y puertos es complicada. <br />
+              Cuanto más nuevo es el desarrollo más se ajusta a patrones docker <br />
+              https://drupaltools.github.io/
+            </aside>
+          </section>
+          <section>
+            <h2>Más herramientas</h2>
+            <p>
+              https://drupaltools.github.io/
+            </p>
+            <aside class="notes">
+              Terra, humpback
+            </aside>
+          </section>
+          <section>
+            <h2>¿Que herramienta elijo?</h2>
+            <aside class="notes">
+              Docker compose <br />
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Hacia un estándar para desarrolladores</h2>
+            <ul>
+              <li>Imagen oficial</li>
+              <li>Plataformas soportadas</li>
+            </ul>
+            <aside class="notes">
+              Las mejoras en docker hacen que salga ahora la discusión <br />
+              Estándar no significa deshechar estas herramientas. <br />
+              Hace falta un consenso desde la comunidad <br />
+              Dependencias mínimas <br />
+            </aside>
+          </section>
+          <section>
+            <h2>El futuro</h2>
+            <ul>
+              <li>
+                First-time experience initiative <br />
+                <a href="https://www.drupal.org/project/drupal/issues/2911319">https://www.drupal.org/project/drupal/issues/2911319</a>
+              </li>
+              <li>
+                Official Local Development Environment <br />
+                <a href=://www.drupal.org/project/ideas/issues/2965681">https://www.drupal.org/project/ideas/issues/2965681</a>
+              </li>
+            </ul>
+            <aside class="notes">
+              Tener un entorno drupal con un solo comando. <br />
+              Un evaluador de Drupal no lo encuentra sencillo <br />
+              Es una discusión abierta sobre como estandarizar <br />
+              Se puede hacer sencillo para un evaluador o un usuario avanzado <br />
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Preguntas 🤔</h2>
+            <aside class="notes">
+            </aside>
+          </section>
+          <section>
+            <h2>Gracias</h2>
+            <img src="images/thanks.gif" alt="Thanks" />
             <aside class="notes">
             </aside>
           </section>
