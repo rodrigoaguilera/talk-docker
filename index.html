@@ -34,6 +34,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
   </head>
   <body>
     <div class="reveal">
+      <p style="float: right; padding: 0 10px 0 0; ">#DCSpainDocker</p>
       <div class="slides">
         <section>
           <img src="images/Druplicon2015.png" alt="Druplicon" />
@@ -47,25 +48,35 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             La motivación de esta charla dar a conocer nuestro recorrido <br />
             hacia una estandarización de las herramientas de desarrollo. <br />
             Queremos dar por solucionados problemas <br />
-            del pasado para dedicarnos a nuevos problemas.
+            del pasado para dedicarnos a nuevos problemas. <br />
+            Deberia haber una charla al menos. <br />
+            Docker ha cambiado mucho en un año <br />
           </aside>
         </section>
         <section>
           <h1>Hola 👋</h1>
+          <p>
+          Drupal.org: rodrigoaguilera <br />
+          Twitter: @marinero <br />
+          </p>
+          <p>
+          Drupal.org: dimaro <br />
+          Twitter: @dimaro_ <br />
+          </p>
           <p class="fragment">
-          <img src="images/ymbralogo.png" alt="Ymbra" width="250" style="border: 0">
+            <img src="images/ymbralogo.png" alt="Ymbra" width="250" style="border: 0">
           </p>
 
           <aside class="notes">
-            Gracias a la AED, Ymbra <br />
-            Diego se ha incorporado recientemente a Ymbra desde Sevilla <br />
-            Tiene un verdadero interés por la estandarización para que <br />
+            Diego se ha incorporado recientemente a Ymbra desde Sevilla.
+            Tiene un verdadero interés por la estandarización para que
             los proyectos que realizamos sigan unos criterios definidos.  <br />
-            Ambos teniamos un especial interés en Docker por que nos ha facilitado mucho la vida. <br />
             Rodrigo es de Madrid y ahora vive y trabaja en Barcelona con Ymbra. <br />
             Lleva unos años dando charlas sobre procesos de desarrollo y calidad <br />
             en temas como composer, revisión de código, contenido por defecto  y testing con behat. <br />
             Siempre tiene curiosidad sobre como se puede mejorar o automatizar los procesos del día a día. <br />
+            Ambos teniamos un especial interés en Docker por que nos ha facilitado mucho la vida. <br />
+            Gracias a la AED, Ymbra <br />
           </aside>
         </section>
         <section>
@@ -667,9 +678,10 @@ services:
             </aside>
           </section>
           <section>
-            <h2>¿Que herramienta elijo?</h2>
+            <h2>¿Que herramienta recomiendas?</h2>
             <aside class="notes">
               Docker compose <br />
+              Mirar la documentación <br />
             </aside>
           </section>
         </section>
@@ -709,8 +721,11 @@ services:
         </section>
         <section>
           <section>
-            <h2>Preguntas 🤔</h2>
+            <h2> 🤔</h2>
+            <p>¿Que partes de la sesión os han revelado algo interesante?</p>
+            <p>¿Algun concepto ha quedado borroso?</p>
             <aside class="notes">
+              Preguntas
             </aside>
           </section>
           <section>
@@ -731,6 +746,11 @@ services:
 // - https://github.com/hakimel/reveal.js#configuration
 // - https://github.com/hakimel/reveal.js#dependencies
 Reveal.initialize({
+  controls: true,
+  progress: true,
+  history: true,
+  center: true,
+  transition: 'slide', // none/fade/slide/convex/concave/zoom
   dependencies: [
   { src: 'plugin/markdown/marked.js' },
   { src: 'plugin/markdown/markdown.js' },
