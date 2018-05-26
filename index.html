@@ -12,40 +12,48 @@
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
     <style>
-body .reveal section img {
-  border: 0;
-}
-body .reveal pre {
-  width: 99%;
-}
-body .reveal section h1, body .reveal section h2 {
-  letter-spacing: 0;
-}
+      body .reveal section img {
+        border: 0;
+        background:none;
+        box-shadow:none;
+        border:none;
+      }
+
+      body .reveal pre {
+        width: 99%;
+      }
+
+      body .reveal section h1,
+      body .reveal section h2 {
+        letter-spacing: 0;
+      }
     </style>
 
     <!-- Printing and PDF exports -->
     <script>
-var link = document.createElement( 'link' );
-link.rel = 'stylesheet';
-link.type = 'text/css';
-link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-document.getElementsByTagName( 'head' )[0].appendChild( link );
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
   </head>
+
   <body>
     <div class="reveal">
-      <p style="float: right; padding: 0 10px 0 0; ">#DCSpainDocker</p>
+      <div style="float: right; margin: 20px 20px 0 0;">#DCSpainDocker</div>
       <div class="slides">
         <section>
-          <img src="images/Druplicon2015.png" alt="Druplicon" />
+          <img src="images/druplicon-small.png" alt="Druplicon" style=" margin-right: 5px;"/>
           <h2 style="color:red;">♥</h2>
-          <img src="images/docker-logo.png" alt="Docker" />
+          <img src="images/docker-logo.png" alt="Docker" style="margin-left: 10px; max-height: 270px; max-width: 270px"/>
         </section>
         <section>
           <h1>Docker</h1>
-          <h3>Súbete al barco de las herramientas de desarrollo estándar 🚢</h3>
+          <h3>Súbete al barco de las herramientas de desarrollo estándar</h3>
+          <h2>🚢</h2>
           <aside class="notes">
-            La motivación de esta charla dar a conocer nuestro recorrido <br />
+            La motivación de esta charla es dar a conocer nuestro recorrido <br />
             hacia una estandarización de las herramientas de desarrollo. <br />
             Queremos dar por solucionados problemas <br />
             del pasado para dedicarnos a nuevos problemas. <br />
@@ -54,45 +62,58 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
           </aside>
         </section>
         <section>
-          <h1>Hola 👋</h1>
-          <p>
-          Drupal.org: rodrigoaguilera <br />
-          Twitter: @marinero <br />
-          </p>
-          <p>
-          Drupal.org: dimaro <br />
-          Twitter: @dimaro_ <br />
-          </p>
-          <p class="fragment">
-            <img src="images/ymbralogo.png" alt="Ymbra" width="250" style="border: 0">
-          </p>
-
+          <div>
+            <img src="images/ymbralogo.png" alt="Ymbra" style=" width:50%; height: 50%; border: 0">
+          </div>
+          <div>
+            <div style="float:left">
+              <img src="images/rodrigoaguilera.jpg" alt="dimaro" style="border-radius: 50%; height:144px; width: 140px;">
+              <div>
+                <div>Rodrigo Aguilera</div>
+                <img src="images/icon-twitter.png" width="30" alt="Twitter rodrigoaguilera" title="@marinero">
+                <div style="font-size: 20px;">@marinero</div>
+                <img src="images/icon-drupal.png" width="35" alt="Drupal.org rodrigoaguilera" title="rodrigoaguilera">
+                <div style="font-size: 20px;">rodrigoaguilera</div>
+                <span></span>
+              </div>
+            </div>
+            <div style="float: right">
+              <img src="images/dimaro.png" alt="dimaro">
+              <div>
+                <div>Diego Marrufo</div>
+                <img src="images/icon-twitter.png" width="30" alt="Twitter dimaro">
+                <div style="font-size: 20px;">@dimaro_</div>
+                <img src="images/icon-drupal.png" width="35" alt="Drupal.org dimaro">
+                <div style="font-size: 20px;">dimaro</div>
+              </div>
+            </div>
+          </div>
           <aside class="notes">
             Diego se ha incorporado recientemente a Ymbra desde Sevilla.
             Tiene un verdadero interés por la estandarización para que
-            los proyectos que realizamos sigan unos criterios definidos.  <br />
+            los proyectos que realizamos sigan unos criterios definidos.<br />
+
             Rodrigo es de Madrid y ahora vive y trabaja en Barcelona con Ymbra. <br />
             Lleva unos años dando charlas sobre procesos de desarrollo y calidad <br />
-            en temas como composer, revisión de código, contenido por defecto  y testing con behat. <br />
+            en temas como composer, revisión de código, contenido por defecto y testing con behat. <br />
             Siempre tiene curiosidad sobre como se puede mejorar o automatizar los procesos del día a día. <br />
             Ambos teniamos un especial interés en Docker por que nos ha facilitado mucho la vida. <br />
-            Gracias a la AED, Ymbra <br />
           </aside>
         </section>
         <section>
-          <h2>¿Que tal vosotros?</h2>
+          <h2>Experiencia con Docker</h2>
           <aside class="notes">
-            Quien tiene experiencia con docker? <br />
+            Quien tiene experiencia con Docker? <br />
             Quien se dedica al desarrollo exclusivamente? <br />
             Quien se se considera más devops? <br />
           </aside>
         </section>
         <section>
-          <h2>Agenda</h2>
+          <h2>¿Que veremos?</h2>
           <p><a href="https://rodrigoaguilera.github.io/talk-docker/">https://rodrigoaguilera.github.io/talk-docker/</a></p>
           <ul>
-            <li>Introducción a docker</li>
-            <li>Comandos docker</li>
+            <li>Introducción a Docker</li>
+            <li>Comandos Docker</li>
             <li>Trabajo en equipo</li>
             <li>Errores comunes y buenas prácticas</li>
             <li>Entornos completos</li>
@@ -103,9 +124,9 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
         <section>
           <section>
-            <h1>Historia</h1>
-            <p>¿Como hemos llegado hasta aquí?</p>
+            <h2>¿Por qué esta sesión?</h2>
             <aside class="notes">
+              Camino que nos ha llevado a introducir Docker.
             </aside>
           </section>
           <section>
@@ -143,7 +164,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
         <section>
           <section>
-            <h1>Docker 🐋</h1>
+            <h2>Introducción a Docker</h2>
             <aside class="notes">
               Virtualización ligera a nivel de sistema operativo. <br />
               Aisla procesos de manera que cada uno tiene su red,
@@ -158,6 +179,11 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               <li>Reescritura en Go separando componentes y creando una API REST</li>
             </ul>
             <aside class="notes">
+              27.000 estrellas de GitHub
+              Muchos de los grandes como Google, RedHat ya trabajan con Docker
+              Repercusion grande en el mundo del desarrollo, el equipo original ya no es el principal colaborador
+              Recibe unos 15M de dolares de financiacion.
+
               Principal adopción como herramienta de desarrollo <br />
               Cada vez más se empuja en entornos de producción
             </aside>
@@ -177,7 +203,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             <aside class="notes">
               Para muchos puede suponer un cambio de paradigma  <br />
               porque usa una "maquina virtual" por cada herramienta que usamos: <br />
-              php, servidor, web, varias bases de datos.
+              php, servidor, web, varias bases de datos, motor solr, etc
             </aside>
           </section>
           <section>
@@ -188,7 +214,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             </aside>
           </section>
           <section>
-            <h2>Entornos de desarrollo docker</h2>
+            <h2>Entornos de desarrollo Docker</h2>
             <ul>
               <li>Proyectos separados con requisitos propios</li>
               <li>Diferentes versiones de la misma herramienta</li>
@@ -197,7 +223,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
             </ul>
             <aside class="notes">
               Distintas versiones de php, mysql, mariadb, etc. <br />
-              Si se necesita una base de datos microsoft se puede añadir. <br />
+              SQL Server <br />
             </aside>
           </section>
           <section>
@@ -212,7 +238,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
         </section>
         <section>
           <section>
-            <h2>Manos a la obra con docker</h2>
+            <h2>Manos a la obra con Docker</h2>
             <p>Como empezar a desenvolverse con los comandos</p>
             <aside class="notes">
             </aside>
@@ -294,7 +320,7 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );
               docker run mysql
             </code></pre>
             <aside class="notes">
-              Se debe separar aun más entre apache y php <br />
+              Ir mas alla APACHE - PHP<br />
             </aside>
           </section>
           <section>
@@ -312,13 +338,14 @@ COPY php.ini /usr/local/etc/php/php.ini
 CMD ["apachectl", "-DFOREGROUND"]
             </code></pre>
             <aside class="notes">
-            No se está limpiando la caché <br />
+              Reinicio apache.
+              No se está limpiando la caché <br />
             </aside>
           </section>
           <section>
             <h2>Construir la imagen 🔧</h2>
             <pre><code data-trim data-noescape>
-              docker build -t ymbra/myapache .
+              docker build --tag ymbra/myapache .
               docker run -p 80:80 ymbra/myapache
             </code></pre>
             <aside class="notes">
@@ -348,7 +375,7 @@ CMD ["apachectl", "-DFOREGROUND"]
               <li>Etc..</li>
             </ul>
             <aside class="notes">
-              Se pueden configurar para activar XDebug y otras herramientas. <br />
+              XDebug, ElasticSearch, etc. <br />
             </aside>
           </section>
           <section>
@@ -419,7 +446,7 @@ services:
   pma:
     image: phpmyadmin/phpmyadmin
     environment:
-      PMA_HOSTS: "db"
+      PMA_HOSTS: db
       PMA_USER: db
       PMA_PASSWORD: db
     ports:
@@ -509,7 +536,7 @@ services:
           </section>
           <section>
             <h2>Permisos y propietarios</h2>
-            <p>ficheros con UIDs distintas al usuario huesped</p>
+            <p>Ficheros con UIDs distintas al usuario huesped</p>
             <ul>
               <li>Mac y windows: sin problemas. mapeado al usuario del huesped</li>
               <li> Linux:
@@ -563,9 +590,10 @@ services:
         </section>
         <section>
           <section>
-            <h2>Herramientas para usar drupal y docker</h2>
-            <p>Añaden funcionalidad por encima de docker</p>
+            <h2>Herramientas para usar Drupal y Docker</h2>
+            <p>Añaden funcionalidad por encima de Docker</p>
             <aside class="notes">
+              Abtraccion herramientas
               No se mencionan herramientas vagrant o locales. <br />
             </aside>
           </section>
@@ -574,7 +602,7 @@ services:
             <ul>
               <li>Preconfigurado</li>
               <li>Gestor de tareas en el contenedor</li>
-              <li>Integraciones con otros servicios: pantheon, platform.sh, etc</li>
+              <li>Integraciones con otros servicios: Pantheon, Platform.sh, etc</li>
             </ul>
             <aside class="notes">
               php, servidor web y base datos ya preparadas. <br />
@@ -598,14 +626,14 @@ services:
             <h2>DrupalVM</h2>
             <ul>
               <li>Escrita con vagrant en mente</li>
-              <li>Soporte docker experimental</li>
+              <li>Soporte Docker experimental</li>
               <li>Monolítico</li>
               <li>Especifíco para Drupal</li>
             </ul>
             <aside class="notes">
-              Tiene un bonito dashboard. <br />
-              Sincronización con NFS: problemas de rendimiento<br />
-              No tiene gestor de tareas: como es monolitico solo hay una maquina virtual. <br />
+              Dashboard. <br />
+              NFS: problemas de rendimiento<br />
+              No tiene gestor de tareas: como es monolitico solo hay una maquina virtual.<br />
             </aside>
           </section>
           <section>
@@ -627,7 +655,7 @@ services:
           <section>
             <h2>Ddev</h2>
             <ul>
-              <li>Herramienta de consola escrita en go</li>
+              <li>Herramienta de consola escrita en Go</li>
               <li>Desarrollado por Drud. </li>
               <li>Soporta desplieges a los entornos de drud</li>
               <li>Centrado en Drupal, Wordpress y typo3</li>
@@ -644,8 +672,7 @@ services:
             <h2>Lando</h2>
             <ul>
               <li>Herramienta de consola escrita en Javascript</li>
-              <li>Requiere nodejs</li>
-              <li>Muy flexible: comandos, eventos,servicios adicionales, API, etc.</li>
+              <li>Muy flexible: comandos, eventos, servicios adicionales, API, etc</li>
               <li>Soporta un amplio espectro de frameworks/lenguajes</li>
             </ul>
             <aside class="notes">
@@ -665,7 +692,6 @@ services:
             <aside class="notes">
               La gestión de DNS y puertos es complicada. <br />
               Cuanto más nuevo es el desarrollo más se ajusta a patrones docker <br />
-              https://drupaltools.github.io/
             </aside>
           </section>
           <section>
@@ -693,9 +719,8 @@ services:
               <li>Plataformas soportadas</li>
             </ul>
             <aside class="notes">
-              Las mejoras en docker hacen que salga ahora la discusión <br />
+              discusión comunidad <br />
               Estándar no significa deshechar estas herramientas. <br />
-              Hace falta un consenso desde la comunidad <br />
               Dependencias mínimas <br />
             </aside>
           </section>
@@ -721,17 +746,26 @@ services:
         </section>
         <section>
           <section>
-            <h2> 🤔</h2>
-            <p>¿Que partes de la sesión os han revelado algo interesante?</p>
+            <img src="images/questions.gif" alt="Questions" />
+            <p>¿Que partes os han revelado algo interesante?</p>
             <p>¿Algun concepto ha quedado borroso?</p>
             <aside class="notes">
               Preguntas
             </aside>
           </section>
+        </section>
           <section>
-            <h2>Gracias</h2>
-            <img src="images/thanks.gif" alt="Thanks" />
+            <h2>Gracias!</h2>
+            <div class="fragment">
+              Slides: <a href="https://rodrigoaguilera.github.io/talk-docker/">https://rodrigoaguilera.github.io/talk-docker/</a>
+            </div>
+            <div class="fragment">
+              <img src="images/thanks.gif" alt="Thanks" />
+            </div>
             <aside class="notes">
+              Agradecer a Ymbra por darnos tiempo para preparar la sesión.
+              Agradecer al grupo local en apoyo de la AED por hacer posible una mas vez la DrupalCamp.
+              Agradecer a los sponsors ya que sin ellos seria aún mas dificil hacer este tipo de eventos.
             </aside>
           </section>
         </section>
